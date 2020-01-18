@@ -1,0 +1,4 @@
+enum DictionaryKeys {
+  title,
+  unknownError,
+}
