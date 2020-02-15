@@ -68,7 +68,7 @@ class _ApplicationState extends State<Application> {
       onGenerateRoute: AppRouter.getRoute,
       onUnknownRoute: AppRouter.onUnknownRoute,
       debugShowCheckedModeBanner: false,
-//      locale: Locale('he', 'IL'),
+      locale: Locale('en'),
       localizationsDelegates: [
         const AppDictionaryDelegate(),
         GlobalCupertinoLocalizations.delegate,

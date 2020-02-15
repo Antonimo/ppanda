@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ppanda/modules/home/home_screen.dart';
 import 'package:ppanda/modules/page_not_found.dart';
+import 'package:ppanda/modules/shop_item/shop_item_screen.dart';
 
 class AppRouter {
   static const TAG = '[AppRouter] ';
@@ -14,6 +15,7 @@ class AppRouter {
 
 
   static const routeHome = '/home';
+  static const routeShopItem = 'shopItem';
 
 
   static void navigateTo(String route) {
@@ -30,12 +32,14 @@ class AppRouter {
   }
 
   static MaterialPageRoute getRoute(RouteSettings settings) {
-    print(TAG + ' getRoute ${settings.name}');
+    print(TAG + ' getRoute ${settings.name}, ${settings.arguments}');
 
 
     switch (settings.name) {
       case AppRouter.routeHome:
         return MaterialPageRoute(settings: settings, builder: (BuildContext context) => HomeScreen());
+      case AppRouter.routeShopItem:
+        return MaterialPageRoute(settings: settings, builder: (BuildContext context) => ShopItemScreen((settings.arguments as Map)['id']));
       default:
         return null; // will go to onUnknownRoute
     }
