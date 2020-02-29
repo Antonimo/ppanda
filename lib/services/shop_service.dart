@@ -10,6 +10,7 @@ class ShopService {
       image: Images.item1,
       options: [
         ShopItemOption(
+          id: 'taste',
           name: 'טעם',
           choices: [
             ShopItemOptionChoice(
@@ -23,6 +24,7 @@ class ShopService {
           ],
         ),
         ShopItemOption(
+          id: 'cover',
           name: 'ציפוי',
           choices: [
             ShopItemOptionChoice(
@@ -44,8 +46,12 @@ class ShopService {
           ],
         ),
         ShopItemOption(
+          id: 'color',
           name: 'צבע',
           type: 'color',
+          condition: {
+            'cover': 'cakepop_coat_white_chocolate',
+          },
         ),
       ],
     ),
@@ -71,14 +77,18 @@ class ShopItem {
 }
 
 class ShopItemOption {
+  final String id;
   final String name;
   final String type;
+  final Map<String, String> condition;
 
   final List<ShopItemOptionChoice> choices;
 
   ShopItemOption({
+    this.id,
     this.name,
     this.type,
+    this.condition,
     this.choices,
   });
 }

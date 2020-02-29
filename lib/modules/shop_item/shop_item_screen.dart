@@ -18,6 +18,8 @@ class _ShopItemScreenState extends State<ShopItemScreen> {
 
   Map<String, dynamic> selectedOptions = {};
 
+  int showOptionsItems = 1;
+
   @override
   void initState() {
     super.initState();
@@ -33,13 +35,52 @@ class _ShopItemScreenState extends State<ShopItemScreen> {
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              const SizedBox(height: 16.0),
-              Text(shopItem.name),
-              const SizedBox(height: 16.0),
-              ...buildShopItemOptions(),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 232,
+                  width: double.infinity,
+                  child: Image(
+                    image: shopItem.image,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Container(
+                  padding: const EdgeInsets.all(16.0),
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const SizedBox(height: 16.0),
+                      Text(
+                        shopItem.name,
+                        style: TextStyle(
+                          fontSize: 24.0,
+                        ),
+                      ),
+                      const SizedBox(height: 16.0),
+                      ...buildShopItemOptions(),
+                    ],
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: RaisedButton(
+                  onPressed: (){},
+                  padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+                  child: Text(
+                    'הזמן!',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              ),
             ],
           ),
         ),
@@ -50,13 +91,36 @@ class _ShopItemScreenState extends State<ShopItemScreen> {
   List<Widget> buildShopItemOptions() {
     List<Widget> optionsWidgets = [];
 
+    int addedItems = 0;
+
     shopItem.options.forEach((option) {
+
+      if (addedItems >= showOptionsItems){
+        return;
+      }
+
+      if (option.condition != null){
+        // TODO: support multiple choices
+
+        print('option.condition.keys.first: ${option.condition.keys.first}');
+        print('selectedOptions[option.condition.keys.first]: ${selectedOptions[option.condition.keys.first]}');
+
+        print('option.condition.values.first: ${option.condition.values.first}');
+
+        if (selectedOptions[option.condition.keys.first] == null || selectedOptions[option.condition.keys.first] != option.condition.values.first){
+          return;
+        }
+      }
+
       optionsWidgets.add(
         const SizedBox(height: 16.0),
       );
 
       optionsWidgets.add(
-        Text(option.name),
+        Text(
+          option.name,
+          textAlign: TextAlign.start,
+        ),
       );
 
       optionsWidgets.add(
@@ -68,7 +132,7 @@ class _ShopItemScreenState extends State<ShopItemScreen> {
           DropdownButton<String>(
             isExpanded: true,
             hint: Text('בחר'),
-            value: selectedOptions[option.name],
+            value: selectedOptions[option.id],
             // TODO: id
             items: option.choices.map((ShopItemOptionChoice choice) {
               return DropdownMenuItem<String>(
@@ -78,7 +142,11 @@ class _ShopItemScreenState extends State<ShopItemScreen> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-                selectedOptions[option.name] = value;
+                if (selectedOptions[option.id] == null){
+                  showOptionsItems++;
+                }
+                print('SETTING: selectedOptions[${option.name}]: $value');
+                selectedOptions[option.id] = value;
               });
               print('value: $value');
             },
@@ -90,39 +158,37 @@ class _ShopItemScreenState extends State<ShopItemScreen> {
         Color currentColor = Color(0xff443a49);
 
         optionsWidgets.add(
-          Center(
-            child: RaisedButton(
-              elevation: 3.0,
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Select a color'),
-                      content: SingleChildScrollView(
-                        child: BlockPicker(
-                          pickerColor: currentColor,
-                          onColorChanged: (Color color) {
-                            setState(() {
-
-                              selectedOptions[option.name] = color;
-                              Navigator.of(context).pop();
-
-                            });
-                          },
-                        ),
+          RaisedButton(
+            elevation: 3.0,
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('בחר צבע'),
+                    content: SingleChildScrollView(
+                      child: BlockPicker(
+                        pickerColor: currentColor,
+                        onColorChanged: (Color color) {
+                          setState(() {
+                            selectedOptions[option.id] = color;
+                            Navigator.of(context).pop();
+                          });
+                        },
                       ),
-                    );
-                  },
-                );
-              },
-              child: const Text('בחר צבע'),
-              color: selectedOptions[option.name] ?? currentColor,
-              textColor: useWhiteForeground(selectedOptions[option.name] ?? currentColor) ? const Color(0xffffffff) : const Color(0xff000000),
-            ),
+                    ),
+                  );
+                },
+              );
+            },
+            child: const Text('בחר צבע'),
+            color: selectedOptions[option.id] ?? currentColor,
+            textColor: useWhiteForeground(selectedOptions[option.id] ?? currentColor) ? const Color(0xffffffff) : const Color(0xff000000),
           ),
         );
       }
+
+      addedItems++;
     });
 
     return optionsWidgets;
@@ -147,9 +213,6 @@ bool useWhiteForeground(Color color, {double bias: 1.0}) {
 
   // New:
   bias ??= 1.0;
-  int v = sqrt(pow(color.red, 2) * 0.299 +
-      pow(color.green, 2) * 0.587 +
-      pow(color.blue, 2) * 0.114)
-      .round();
+  int v = sqrt(pow(color.red, 2) * 0.299 + pow(color.green, 2) * 0.587 + pow(color.blue, 2) * 0.114).round();
   return v < 130 * bias ? true : false;
 }
