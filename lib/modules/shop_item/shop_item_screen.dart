@@ -128,6 +128,16 @@ class _ShopItemScreenState extends State<ShopItemScreen> {
       );
 
       if (option.choices != null) {
+
+        // if the sub options have changed, and the selected value doesnt exist then reset the choice.
+        if ( selectedOptions[option.id] != null &&
+            option.choices.where((ShopItemOptionChoice choice) {
+              return choice.id == selectedOptions[option.id];
+            }).length != 1
+        ){
+          selectedOptions[option.id] = null;
+        }
+
         optionsWidgets.add(
           DropdownButton<String>(
             isExpanded: true,

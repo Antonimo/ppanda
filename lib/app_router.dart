@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ppanda/modules/home/home_screen.dart';
 import 'package:ppanda/modules/page_not_found.dart';
+import 'package:ppanda/modules/shop_item/cakepop.dart';
+import 'package:ppanda/modules/shop_item/cupcake.dart';
+import 'package:ppanda/modules/shop_item/magnum.dart';
+import 'package:ppanda/modules/shop_item/mousse.dart';
 import 'package:ppanda/modules/shop_item/shop_item_screen.dart';
 
 class AppRouter {
@@ -39,7 +43,22 @@ class AppRouter {
       case AppRouter.routeHome:
         return MaterialPageRoute(settings: settings, builder: (BuildContext context) => HomeScreen());
       case AppRouter.routeShopItem:
-        return MaterialPageRoute(settings: settings, builder: (BuildContext context) => ShopItemScreen((settings.arguments as Map)['id']));
+        final String shopItemId = (settings.arguments as Map)['id'];
+
+//        if (shopItemId == 'cakepop'){
+//          return MaterialPageRoute(settings: settings, builder: (BuildContext context) => CakePop(shopItemId));
+//        }
+//        if (shopItemId == 'cupcake'){
+//          return MaterialPageRoute(settings: settings, builder: (BuildContext context) => CupCake(shopItemId));
+//        }
+//        if (shopItemId == 'mousse'){
+//          return MaterialPageRoute(settings: settings, builder: (BuildContext context) => Mousse(shopItemId));
+//        }
+//        if (shopItemId == 'magnum'){
+//          return MaterialPageRoute(settings: settings, builder: (BuildContext context) => Magnum(shopItemId));
+//        }
+
+        return MaterialPageRoute(settings: settings, builder: (BuildContext context) => ShopItemScreen(shopItemId));
       default:
         return null; // will go to onUnknownRoute
     }
