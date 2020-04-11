@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ppanda/app_router.dart';
 import 'package:ppanda/dictionary/doctionary_keys.dart';
 import 'package:ppanda/modules/order/order_form_screen.dart';
 import 'package:ppanda/modules/splash_screen.dart';
 import 'package:ppanda/theme/app_theme.dart';
+import 'package:ppanda/utils/screen_info.dart';
 import 'dictionary/dictionary.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -23,13 +25,15 @@ class _ApplicationState extends State<Application> {
   void initState() {
     super.initState();
 
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
 
-    Timer(Duration(seconds: 3), (){
-      AppRouter.navigateTo(AppRouter.routeHome);
-    });
+//    Timer(Duration(seconds: 3), (){
+//      AppRouter.navigateTo(AppRouter.routeHome);
+//    });
 
-
-
+    WidgetsBinding.instance.addPostFrameCallback((_) => AppRouter.navigateTo(AppRouter.routeHome));
 
     ///
     ///
@@ -51,7 +55,6 @@ class _ApplicationState extends State<Application> {
   void dispose() {
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +86,8 @@ class _ApplicationState extends State<Application> {
         const Locale('ru'),
       ],
       builder: (context, child) {
+
+        ScreenInfo().init(context);
         return Directionality(
           textDirection: TextDirection.rtl,
           child: child,

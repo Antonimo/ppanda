@@ -10,16 +10,23 @@ The Flutter framework operates in logical pixels, so it is rarely necessary to d
 https://api.flutter.dev/flutter/dart-ui/Window/devicePixelRatio.html
 
  */
-class SizeConfig {
-  static const TAG = '[SizeConfig] ';
+class ScreenInfo {
+  static const TAG = '[ScreenInfo] ';
+
   static MediaQueryData mediaQueryData;
-  static double screenWidth;
-  static double screenHeight;
+
+  static EdgeInsets viewInsets;
+  static EdgeInsets padding;
+
+  static double width;
+  static double height;
+
   static double blockSizeHorizontal;
   static double blockSizeVertical;
 
   static double safeAreaHorizontal;
   static double safeAreaVertical;
+
   static double safeBlockHorizontal;
   static double safeBlockVertical;
 
@@ -42,23 +49,30 @@ class SizeConfig {
 
   void init(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
-    isPortrait = mediaQueryData.orientation == Orientation.portrait;
-    isLandscape = mediaQueryData.orientation == Orientation.landscape;
 
-    screenWidth = mediaQueryData.size.width;
-    screenHeight = mediaQueryData.size.height;
-    blockSizeHorizontal = screenWidth / 100;
-    blockSizeVertical = screenHeight / 100;
+    viewInsets = mediaQueryData.viewInsets;
+    padding = mediaQueryData.padding;
+
+    width = mediaQueryData.size.width;
+    height = mediaQueryData.size.height;
+
+    blockSizeHorizontal = width / 100;
+    blockSizeVertical = height / 100;
 
     safeAreaHorizontal = mediaQueryData.padding.left + mediaQueryData.padding.right;
     safeAreaVertical = mediaQueryData.padding.top + mediaQueryData.padding.bottom;
-    safeBlockHorizontal = (screenWidth - safeAreaHorizontal) / 100;
-    safeBlockVertical = (screenHeight - safeAreaVertical) / 100;
 
-    safeAreaWidth = screenWidth - safeAreaHorizontal;
-    safeAreaHeight = screenHeight - safeAreaVertical;
+    safeBlockHorizontal = (width - safeAreaHorizontal) / 100;
+    safeBlockVertical = (height - safeAreaVertical) / 100;
 
-    widthFactor = screenWidth / designScreenWidth;
-    heightFactor = screenHeight / designScreenHeight;
+    safeAreaWidth = width - safeAreaHorizontal;
+    safeAreaHeight = height - safeAreaVertical;
+
+    widthFactor = width / designScreenWidth;
+    heightFactor = height / designScreenHeight;
+
+    Orientation orientation = mediaQueryData.orientation;
+    isPortrait = orientation == Orientation.portrait;
+    isLandscape = orientation == Orientation.landscape;
   }
 }

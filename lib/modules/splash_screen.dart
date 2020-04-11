@@ -44,9 +44,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          color: AppColors.secondary[900],
-        ),
+        color: AppColors.primary,
         child: Stack(
           children: <Widget>[
             SafeArea(
