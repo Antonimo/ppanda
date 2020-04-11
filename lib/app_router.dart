@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ppanda/modules/home/home_screen.dart';
+import 'package:ppanda/modules/order/order_form_screen.dart';
 import 'package:ppanda/modules/page_not_found.dart';
 import 'package:ppanda/modules/shop_item/cakepop.dart';
 import 'package:ppanda/modules/shop_item/cupcake.dart';
@@ -20,12 +21,16 @@ class AppRouter {
 
   static const routeHome = '/home';
   static const routeShopItem = 'shopItem';
+  static const routeOrderForm = 'orderForm';
 
 
   static void navigateTo(String route) {
     switch (route) {
       case routeHome:
         appNavigatorKey.currentState.pushNamedAndRemoveUntil(routeHome, (Route<dynamic> route) => false);
+        break;
+      case routeOrderForm:
+        appNavigatorKey.currentState.pushNamed(routeOrderForm);
         break;
       default:
     }
@@ -59,6 +64,8 @@ class AppRouter {
 //        }
 
         return MaterialPageRoute(settings: settings, builder: (BuildContext context) => ShopItemScreen(shopItemId));
+      case AppRouter.routeOrderForm:
+        return MaterialPageRoute(settings: settings, builder: (BuildContext context) => OrderFormScreen());
       default:
         return null; // will go to onUnknownRoute
     }

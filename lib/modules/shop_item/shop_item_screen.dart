@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/block_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ppanda/app_router.dart';
+import 'package:ppanda/services/cart_service.dart';
 import 'package:ppanda/services/shop_service.dart';
 
 const _horizontalPadding = 32.0;
@@ -11,12 +13,10 @@ const _carouselItemMargin = 8.0;
 const _carouselHeightMin = 200.0 + 2 * _carouselItemMargin;
 const double systemTextScaleFactorOption = -1;
 
-
 const _regular = FontWeight.w400;
 const _medium = FontWeight.w500;
 const _semiBold = FontWeight.w600;
 const _bold = FontWeight.w700;
-
 
 class ShopItemScreen extends StatefulWidget {
   final String itemId;
@@ -117,7 +117,13 @@ class _ShopItemScreenState extends State<ShopItemScreen> with SingleTickerProvid
               ),
               SliverToBoxAdapter(
                   child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+
+                  CartService.instance.updateCart(shopItem, selectedOptions);
+
+                  AppRouter.navigateTo(AppRouter.routeOrderForm);
+
+                },
                 padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
                 child: Text(
                   'הזמן!',

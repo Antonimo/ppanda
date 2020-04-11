@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:ppanda/app_router.dart';
 import 'package:ppanda/dictionary/doctionary_keys.dart';
+import 'package:ppanda/modules/order/order_form_screen.dart';
 import 'package:ppanda/modules/splash_screen.dart';
 import 'package:ppanda/theme/app_theme.dart';
 import 'dictionary/dictionary.dart';
@@ -64,6 +65,7 @@ class _ApplicationState extends State<Application> {
       navigatorKey: AppRouter.appNavigatorKey,
 //      navigatorObservers: <NavigatorObserver>[],
       home: SplashScreen(),
+//      home: OrderFormScreen(),
       theme: appTheme,
       onGenerateRoute: AppRouter.getRoute,
       onUnknownRoute: AppRouter.onUnknownRoute,
