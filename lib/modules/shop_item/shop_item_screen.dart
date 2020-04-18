@@ -315,7 +315,7 @@ class _CarouselCard extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         color: Colors.grey,
         child: InkWell(
-          onTap: () {},
+//          onTap: () {},
           child: Stack(
             fit: StackFit.expand,
             children: [

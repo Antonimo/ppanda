@@ -5,20 +5,20 @@ class AppColors {
 
   // f8bcbd
 
-  static const int _primaryValue = 0xFFf8bcbd;
+  static const int _primaryValue = 0xFFf8e2e4;
   static const MaterialColor primary = MaterialColor(
     _primaryValue,
     <int, Color>{
-      50: Color(0xFFfef7f7),
-      100: Color(0xFFfdebeb),
-      200: Color(0xFFfcdede),
-      300: Color(0xFFfad0d1),
-      400: Color(0xFFf9c6c7),
+      50: Color(0xFFfefcfc),
+      100: Color(0xFFfdf6f7),
+      200: Color(0xFFfcf1f2),
+      300: Color(0xFFfaebec),
+      400: Color(0xFFf9e6e8),
       500: Color(_primaryValue),
-      600: Color(0xFFf7b6b7),
-      700: Color(0xFFf6adae),
-      800: Color(0xFFf5a5a6),
-      900: Color(0xFFf39798),
+      600: Color(0xFFf7dfe1),
+      700: Color(0xFFf6dadd),
+      800: Color(0xFFf5d6d9),
+      900: Color(0xFFf3cfd1),
     },
   );
 
@@ -39,6 +39,9 @@ class AppColors {
       900: Color(0xFF0F223D),
     },
   );
+
+  static const cardTitle = const Color(0xFFe91e63);
+  static const separator = const Color(0x1F1a1a1a);
 
   static const white = const Color(0xFFFFFFFF);
   static const offWhite = const Color(0xFFFAFAFA);

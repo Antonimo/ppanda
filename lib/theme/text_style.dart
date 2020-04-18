@@ -31,11 +31,11 @@ class AppTextStyle {
 
 
   static final brand1 = TextStyle(
-    fontSize: 12.4,
+    fontSize: 20.0,
     fontWeight: FontWeight.w800,
-    height: 1.16,
-    letterSpacing: 2.0,
-    color: AppColors.primaryText.withOpacity(0.6),
+    height: 1,
+    letterSpacing: 1.5,
+    color: AppColors.cardTitle,
   );
 
   static final brand2 = TextStyle(
@@ -47,9 +47,16 @@ class AppTextStyle {
   static final itemTitle = TextStyle(
     fontSize: 20.0,
     fontWeight: FontWeight.w600,
-    height: 1.16,
+    height: 1,
 //    letterSpacing: 2.0,
-    color: AppColors.primaryText,
+    color: AppColors.cardTitle,
+  );
+
+  static final badge = TextStyle(
+    fontSize: 13.0,
+    fontWeight: FontWeight.normal,
+    height: 1,
+    color: AppColors.cardTitle,
   );
 
   static final price = TextStyle(
@@ -58,6 +65,22 @@ class AppTextStyle {
     height: 1.16,
 //    letterSpacing: 2.0,
     color: Colors.indigo,
+  );
+
+
+  static final menuTitle = TextStyle(
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold,
+    height: 1,
+    color: Colors.black,
+  );
+
+
+  static final menuItem = TextStyle(
+    fontSize: 18.0,
+    fontWeight: FontWeight.normal,
+    height: 1,
+    color: Colors.black,
   );
 
 

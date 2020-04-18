@@ -52,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primary,
       drawer: AppDrawer(),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -90,13 +91,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 32.0,
                       ),
                       const SizedBox(width: 8.0),
-                      Text('ppanda'),
+                      Text(
+                        'ppanda',
+                        style: AppTextStyle.brand1,
+                      ),
                     ],
                   ),
                   Badge(
-                    badgeContent: Text('3'),
+                    badgeContent: Text(
+                      '3',
+                      style: AppTextStyle.badge,
+                    ),
                     badgeColor: AppColors.primary[100],
-                    child: Icon(Icons.shopping_cart),
+                    child: Icon(
+                      Icons.shopping_cart,
+                      color: AppColors.cardTitle,
+                    ),
                   ),
                 ],
               ),
@@ -155,41 +165,53 @@ class _HomeScreenState extends State<HomeScreen> {
               return Container(
                 key: Key('shopItem${shopItem.id}'),
                 padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, 'shopItem', arguments: {'id': shopItem.id});
-                    },
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          height: 120.0,
-                          width: double.infinity,
-                          child: Image(
-                            image: shopItem.image,
-                            fit: BoxFit.cover,
+                height: 120.0 + 16 + 16 + 16 + 16 + 20 + 8,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Stack(
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            height: 120.0,
+                            width: double.infinity,
+                            child: Image(
+                              image: shopItem.image,
+                              fit: BoxFit.cover,
+                            ),
                           ),
+                          Container(
+                            color: AppColors.primary[900],
+                            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  shopItem.name,
+                                  style: AppTextStyle.itemTitle,
+                                ),
+//                              Text(
+//                                '71₪',
+//                                style: AppTextStyle.price,
+//                              )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, 'shopItem', arguments: {'id': shopItem.id});
+                          },
+                          splashColor: AppColors.primary[200].withOpacity(0.6),
                         ),
-                        Container(
-                          color: Colors.redAccent.withOpacity(0.4),
-                          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                shopItem.name,
-                                style: AppTextStyle.itemTitle,
-                              ),
-                              Text(
-                                '71₪',
-                                style: AppTextStyle.price,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               );
