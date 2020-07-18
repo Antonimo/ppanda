@@ -29,11 +29,11 @@ class _ApplicationState extends State<Application> {
       DeviceOrientation.portraitUp,
     ]);
 
-//    Timer(Duration(seconds: 3), (){
-//      AppRouter.navigateTo(AppRouter.routeHome);
-//    });
+    Timer(Duration(seconds: 3), (){
+      AppRouter.navigateTo(AppRouter.routeHome);
+    });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => AppRouter.navigateTo(AppRouter.routeHome));
+//    WidgetsBinding.instance.addPostFrameCallback((_) => AppRouter.navigateTo(AppRouter.routeHome));
 
     ///
     ///
@@ -49,6 +49,7 @@ class _ApplicationState extends State<Application> {
 //      print(TAG + 'navigationState.history: ${state.navigationState.history}');
 ////      print('   ');
 //    });
+
   }
 
   @override
@@ -73,7 +74,7 @@ class _ApplicationState extends State<Application> {
       onGenerateRoute: AppRouter.getRoute,
       onUnknownRoute: AppRouter.onUnknownRoute,
       debugShowCheckedModeBanner: false,
-      locale: Locale('en'),
+      locale: Locale('he'),
       localizationsDelegates: [
         const AppDictionaryDelegate(),
         GlobalCupertinoLocalizations.delegate,
@@ -81,9 +82,9 @@ class _ApplicationState extends State<Application> {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
-        const Locale('en'),
+//        const Locale('en'),
         const Locale('he'),
-        const Locale('ru'),
+//        const Locale('ru'),
       ],
       builder: (context, child) {
 

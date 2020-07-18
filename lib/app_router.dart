@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ppanda/modules/club/club_form_screen.dart';
 import 'package:ppanda/modules/home/home_screen.dart';
 import 'package:ppanda/modules/order/order_form_screen.dart';
 import 'package:ppanda/modules/page_not_found.dart';
@@ -22,6 +23,7 @@ class AppRouter {
   static const routeHome = '/home';
   static const routeShopItem = 'shopItem';
   static const routeOrderForm = 'orderForm';
+  static const routeClubForm = 'clubForm';
 
 
   static void navigateTo(String route) {
@@ -66,6 +68,8 @@ class AppRouter {
         return MaterialPageRoute(settings: settings, builder: (BuildContext context) => ShopItemScreen(shopItemId));
       case AppRouter.routeOrderForm:
         return MaterialPageRoute(settings: settings, builder: (BuildContext context) => OrderFormScreen());
+      case AppRouter.routeClubForm:
+        return MaterialPageRoute(settings: settings, builder: (BuildContext context) => ClubFormScreen());
       default:
         return null; // will go to onUnknownRoute
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ppanda/app_router.dart';
 import 'package:ppanda/services/shop_service.dart';
 import 'package:ppanda/theme/app_colors.dart';
 import 'package:ppanda/theme/text_style.dart';
@@ -36,6 +37,38 @@ class AppDrawer extends StatelessWidget {
               ),
 
               ...getShopItemsMenuItems(context),
+
+              Container(
+                height: 4.0,
+              ),
+
+              Container(
+                padding: EdgeInsets.only(right: 16.0),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: AppColors.separator,
+                      width: 1.0,
+                      style: BorderStyle.solid,
+                    ),
+                  ),
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRouter.routeClubForm);
+                    },
+                    child: ListTile(
+                      title: Text(
+                        'חבר מועדון',
+                        style: AppTextStyle.menuItem,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
             ],
           ),
         ),

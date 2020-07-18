@@ -85,5 +85,29 @@ class AppTextStyle {
 
 
 
+  static final infoListTileTitle = TextStyle(
+    fontSize: 12.4,
+    fontWeight: FontWeight.w600,
+//    height: 1.44,
+    //actualHeight: 20
+    letterSpacing: 0.4,
+    color: AppColors.primaryText.withOpacity(0.6),
+  );
 
+  static final infoListTileContent = TextStyle(
+    fontSize: 16.6,
+    fontWeight: FontWeight.w500,
+//    height: 1.68,
+    //actualHeight: 20
+    letterSpacing: 0.5,
+    color: AppColors.primaryText,
+  );
+
+  static const pickerTitle = TextStyle(
+    fontSize: 15.0,
+    fontWeight: FontWeight.w600,
+    letterSpacing: -0.24,
+    color: AppColors.black,
+    decoration: TextDecoration.none,
+  );
 }

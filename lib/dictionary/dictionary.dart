@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ppanda/dictionary/en.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
+import 'package:ppanda/dictionary/he.dart';
 
 import 'doctionary_keys.dart';
 
@@ -19,7 +20,7 @@ class AppDictionary {
     instance = AppDictionary.of(context);
   }
 
-  static Map<String, Map<DictionaryKeys, String>> _localizedValues = {'en': EN};
+  static Map<String, Map<DictionaryKeys, String>> _localizedValues = {'he': HE};
 
   String get title {
     return _localizedValues[locale.languageCode][DictionaryKeys.title];
@@ -47,7 +48,7 @@ class AppDictionaryDelegate extends LocalizationsDelegate<AppDictionary> {
 
   @override
   bool isSupported(Locale locale) {
-    return ['en'].contains(locale.languageCode);
+    return ['he'].contains(locale.languageCode);
   }
 
   @override
