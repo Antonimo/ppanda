@@ -29,11 +29,11 @@ class _ApplicationState extends State<Application> {
       DeviceOrientation.portraitUp,
     ]);
 
-    Timer(Duration(seconds: 3), (){
-      AppRouter.navigateTo(AppRouter.routeHome);
-    });
+//    Timer(Duration(seconds: 3), (){
+//      AppRouter.navigateTo(AppRouter.routeHome);
+//    });
 
-//    WidgetsBinding.instance.addPostFrameCallback((_) => AppRouter.navigateTo(AppRouter.routeHome));
+    WidgetsBinding.instance.addPostFrameCallback((_) => AppRouter.navigateTo(AppRouter.routeHome));
 
     ///
     ///

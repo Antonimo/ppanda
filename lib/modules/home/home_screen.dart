@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
@@ -156,66 +157,119 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ];
         },
-        body: Container(
-          child: ListView.builder(
-            itemCount: ShopService.items.length,
-            itemBuilder: (BuildContext context, int index) {
-              final shopItem = ShopService.items[index];
-
-              return Container(
-                key: Key('shopItem${shopItem.id}'),
-                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-                height: 120.0 + 16 + 16 + 16 + 16 + 20 + 8,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  child: Stack(
+        body: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Row(
                     children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Container(
-                            height: 120.0,
-                            width: double.infinity,
-                            child: Image(
-                              image: shopItem.image,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Container(
-                            color: AppColors.primary[900],
-                            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  shopItem.name,
-                                  style: AppTextStyle.itemTitle,
-                                ),
-//                              Text(
-//                                '71₪',
-//                                style: AppTextStyle.price,
-//                              )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, 'shopItem', arguments: {'id': shopItem.id});
-                          },
-                          splashColor: AppColors.primary[200].withOpacity(0.6),
+                      Expanded(
+                        child: Image(
+                          image: Images.bg1,
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ],
                   ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Image(
+                          image: Images.bg1,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Image(
+                          image: Images.bg1,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Positioned.fill(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.white.withOpacity(0.3)),
+                  ),
                 ),
-              );
-            },
+              ),
+              Positioned.fill(
+                child: Container(
+                  child: ListView.builder(
+                    primary: false,
+                    itemCount: ShopService.items.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      final shopItem = ShopService.items[index];
+
+                      return Container(
+                        key: Key('shopItem${shopItem.id}'),
+                        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+                        height: 120.0 + 16 + 16 + 16 + 16 + 20 + 8,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          elevation: 0,
+                          clipBehavior: Clip.antiAlias,
+                          child: Stack(
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    height: 120.0,
+                                    width: double.infinity,
+                                    child: Image(
+                                      image: shopItem.image,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Container(
+//                                    color: AppColors.primary[900],
+                                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text(
+                                          shopItem.name,
+                                          style: AppTextStyle.itemTitle,
+                                        ),
+//                              Text(
+//                                '71₪',
+//                                style: AppTextStyle.price,
+//                              )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, 'shopItem', arguments: {'id': shopItem.id});
+                                  },
+                                  splashColor: AppColors.primary[200].withOpacity(0.6),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -5,6 +5,10 @@ class Images {
     return AssetImage('assets/images/ppanda.png');
   }
 
+  static AssetImage get bg1 {
+    return AssetImage('assets/images/bg1.jpg');
+  }
+
 
   static AssetImage get item1 {
     return AssetImage('assets/images/item1.jpg');
